@@ -11,9 +11,7 @@ const extendHex = (shortHex) => {
 }
 
 
-  const shortHex = "#abc";
-  const fullHex = "#aabbcc";
-
+ 
   cy.visit(baseUrl, {
     onBeforeLoad(win) {
       // Stub your functions here
