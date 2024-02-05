@@ -22,7 +22,7 @@ const extendHex = (shortHex) => {
   cy.on("window:alert", (str) => {
     expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
   });
-};
+
 
 
 // Do not change the code below.
