@@ -11,7 +11,17 @@ const extendHex = (shortHex) => {
 }
 
 
+ cy.visit(baseUrl, {
+    onBeforeLoad(win) {
+      // Stub your functions here
+      cy.stub(win, "prompt").onFirstCall().returns(shortHex);
+    },
+  });
 
+  cy.on("window:alert", (str) => {
+    expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
+  });
+};
 	
 
 
