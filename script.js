@@ -11,7 +11,10 @@ const extendHex = (shortHex) => {
 }
 
 
- cy.visit(baseUrl, {
+  const shortHex = "#abc";
+  const fullHex = "#aabbcc";
+
+  cy.visit(baseUrl, {
     onBeforeLoad(win) {
       // Stub your functions here
       cy.stub(win, "prompt").onFirstCall().returns(shortHex);
@@ -22,7 +25,6 @@ const extendHex = (shortHex) => {
     expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
   });
 };
-	
 
 
 // Do not change the code below.
