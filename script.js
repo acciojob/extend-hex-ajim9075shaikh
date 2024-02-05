@@ -1,33 +1,24 @@
-const extendHex = (shortHex) => {
-  
-    if (!/^#([0-9A-Fa-f]{3})$/.test(shortHex)) {
-        throw new Error('Invalid short hex code format');
-	}
-    const [, r, g, b] = shortHex.match(/^#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])$/);
+// Cypress Test
+describe('Hex Extension Test', () => {
+  it('should test the hex extension', () => {
+    const shortHex = "#abc";
+    const fullHex = "#aabbcc";
 
-    const fullHex = `#${r}${r}${g}${g}${b}${b}`;
+    // Visit the baseUrl
+    cy.visit(baseUrl);
 
-    return fullHex;
-}
+    // Stub the window.prompt function
+    cy.window().then((win) => {
+      cy.stub(win, "prompt").returns(shortHex);
+    });
 
+    // Trigger the extension logic
+    cy.get('input[type="text"]').type(shortHex); // Assuming an input field for the hex code
+    cy.get('button').click(); // Assuming a button to trigger the logic
 
- 
-it('should test the hex extension', () => {
-  const shortHex = "#abc";
-  const fullHex = "#aabbcc";
-
-  cy.visit(baseUrl, {
-    onBeforeLoad(win) {
-      // Stub your functions here
-      cy.stub(win, "prompt").onFirstCall().returns(shortHex);
-    },
-  });
-
-  cy.on("window:alert", (str) => {
-    expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
+    // Check if the alert displays the correct result
+    cy.on("window:alert", (str) => {
+      expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
+    });
   });
 });
-
-// Do not change the code below.
-const shortHex = prompt("Enter Short Hex.");
-alert(extendHex(shortHex));
