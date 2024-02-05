@@ -12,6 +12,10 @@ const extendHex = (shortHex) => {
 
 
  
+it('should test the hex extension', () => {
+  const shortHex = "#abc";
+  const fullHex = "#aabbcc";
+
   cy.visit(baseUrl, {
     onBeforeLoad(win) {
       // Stub your functions here
@@ -22,8 +26,7 @@ const extendHex = (shortHex) => {
   cy.on("window:alert", (str) => {
     expect(str.toLowerCase()).to.equal(fullHex.toLowerCase());
   });
-
-
+});
 
 // Do not change the code below.
 const shortHex = prompt("Enter Short Hex.");
